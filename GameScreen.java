@@ -11,7 +11,7 @@ public class GameScreen {
 
     public GameScreen() {}
 
-    public void setEngine(Engine e) {
+    public void setEngine(CSEngine e) {
         this.engine = e;
     }
 
@@ -29,7 +29,7 @@ public class GameScreen {
 
         while (true) {
             for (Actor a : iterable) {
-                StdDraw.picture(a.getX(), a.getY(), a.setImgName());
+                StdDraw.picture(a.getX(), a.getY(), a.getImgName());
             }
 
             if (StdDraw.hasNextKeyTyped()) {
