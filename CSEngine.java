@@ -1,6 +1,6 @@
 
 import java.util.TreeMap;
-import java.util.Stack;
+import java.util.LinkedList;
 
 public class CSEngine {
     private static final int UP     = 0;
@@ -15,7 +15,10 @@ public class CSEngine {
     private static final double FRICTION = 0.995;
 
     private RedBlackBST<Integer, Actor> actorTree;
-    private Stack<Actor> actors;
+    private LinkedList<Actor> actors;
+
+    private LinkedList<Object> extras;
+
     private CSMailroom mailroom;
     private GameScreen screen;
     
@@ -24,7 +27,7 @@ public class CSEngine {
     // Constructor, init and setters
 
     public CSEngine() {
-        this.actors     = new Stack<Actor>();
+        this.actors     = new LinkedList<Actor>();
         this.actorTree  = new RedBlackBST<Integer, Actor>();
         this.currID     = 0;
     }
@@ -161,7 +164,7 @@ public class CSEngine {
     public void killActor(int id) {
         actorTree.delete(id);
         Iterable<Integer> keys = actorTree.keys();
-        actors = new Stack<Actor>();
+        actors = new LinkedList<Actor>();
         for (int i : keys) {
             actors.push(actorTree.get(i));
         }
