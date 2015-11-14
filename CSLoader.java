@@ -15,8 +15,11 @@ public class CSLoader {
         this.buildFolder = new File(build);
         this.playerFile = new File(player);
         Scanner readMe = new Scanner(playerFile);
-        while (readMe.hasNext())
+        while (readMe.hasNext()) {
+            String nextline = readMe.next();
+            if (nextline.char)
             System.out.println(readMe.next());
+        }
     }
 
     // test main
