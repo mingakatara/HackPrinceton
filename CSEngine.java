@@ -1,6 +1,6 @@
 
 import java.util.TreeMap;
-import java.util.Stack;
+import java.util.LinkedList;
 
 public class CSEngine {
     private static final int UP     = 0;
@@ -12,9 +12,13 @@ public class CSEngine {
     private static final int[] yBounds  = new int[]{0, 500};
 
     private static final int impulse = 5;
+    private static final double FRICTION = 0.995;
 
     private RedBlackBST<Integer, Actor> actorTree;
-    private Stack<Actor> actors;
+    private LinkedList<Actor> actors;
+
+    private LinkedList<Object> extras;
+
     private CSMailroom mailroom;
     private GameScreen screen;
     
@@ -23,7 +27,7 @@ public class CSEngine {
     // Constructor, init and setters
 
     public CSEngine() {
-        this.actors     = new Stack<Actor>();
+        this.actors     = new LinkedList<Actor>();
         this.actorTree  = new RedBlackBST<Integer, Actor>();
         this.currID     = 0;
     }
@@ -66,6 +70,10 @@ public class CSEngine {
     public void event(Actor a, int id, double x, double y) {
         if (a == null) throw new java.lang.IllegalArgumentException("Null Actor to Event (mouse)");
         switch(id) {
+            case UP: break;
+            case LEFT: break;
+            case DOWN: break;
+            case RIGHT: break;
             default: break;
         }
     }
@@ -85,27 +93,12 @@ public class CSEngine {
     // given mail information, acts accordingly (called from mailroom)
     public void receiveMail(Actor a, int id) {
         if (a == null) throw new java.lang.IllegalArgumentException("Null Actor to receiveMail");
-        System.out.println(id);
         switch(id) {
-            case UP: {  
-                moveUp(a); 
-                System.out.println("up");    
-            } break;
-            case LEFT:  {
-                moveLeft(a);   
-                System.out.println("left");
-            } break;
-
-            case DOWN: {
-                moveDown(a); 
-                System.out.println("down");
-            } break;
-
-            case RIGHT: {
-                moveRight(a);  
-                System.out.println("right");  
-            } break;
-            default: break; 
+            case UP:    moveUp(a);      break;
+            case LEFT:  moveLeft(a);    break;
+            case DOWN:  moveDown(a);    break;
+            case RIGHT: moveRight(a);   break;
+            default:    break; 
         }
     }
 
@@ -119,6 +112,8 @@ public class CSEngine {
     // simple update call to all actors
     public void run() {
         for (Actor a : actors) {
+            a.setVX(a.getVX() * FRICTION);
+            a.setVY(a.getVY() * FRICTION);
             a.update();
         }
     }
@@ -169,7 +164,7 @@ public class CSEngine {
     public void killActor(int id) {
         actorTree.delete(id);
         Iterable<Integer> keys = actorTree.keys();
-        actors = new Stack<Actor>();
+        actors = new LinkedList<Actor>();
         for (int i : keys) {
             actors.push(actorTree.get(i));
         }
