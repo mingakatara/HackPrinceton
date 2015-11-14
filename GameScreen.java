@@ -8,6 +8,7 @@ public class GameScreen {
     private Stack<Actor> iterable;
     private double mouseX;
     private double mouseY;
+    private Player player;
 
     public GameScreen() {}
 
@@ -20,28 +21,36 @@ public class GameScreen {
     }
 
     public void init() {
-        Player player = new Player();
+
+        player = new Player(20.0, 20.0, "images\\fill.png");
 
         StdDraw.setCanvasSize(1000,500);
         StdDraw.setXscale(0, 1000);
         StdDraw.setYscale(0, 500);
 
-        StdDraw.rectangle(500.0, 250.0, 250.0, 125.0);
+        StdDraw.rectangle(500.0, 250.0, 500.0, 250.0);
+
+        engine.giveActor(player, 0);
     }
 
     public void run() {
 
+        StdDraw.clear();
+
         Double xshift = 500.0 - player.getX();
         Double yshift = 200.0 - player.getY();
+        System.out.println(player.getX() + "  " + player.getY());
 
         for (Actor a : iterable) {
-            if (s instanceof Player) {
+            if (a instanceof Player) {
                 StdDraw.picture(500, 200, a.getImgName());
             }
             else {
                 StdDraw.picture((a.getX() + xshift), (a.getY() + yshift), a.getImgName());
             }
         }
+
+        StdDraw.rectangle(500.0 + xshift, 250.0 + yshift, 500.0, 250.0);
         
         if (StdDraw.hasNextKeyTyped()) {
             char next = StdDraw.nextKeyTyped();
