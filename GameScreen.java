@@ -3,11 +3,16 @@
 public class GameScreen {
 
     private Engine engine;
+    private RedBlackBST<Integer, Actor> iterable;
 
     public GameScreen() {}
 
     public void setEngine(Engine e) {
         this.engine = e;
+    }
+
+    public void setActors(RedBlackBST x) {
+        this.iterable = x;
     }
 
     public void run() {
@@ -19,7 +24,7 @@ public class GameScreen {
         StdDraw.setYscale(0, 500);
 
         while (true) {
-            for (Actor a : engine.getActors()) {
+            for (Actor a : iterable) {
                 StdDraw.picture(a.getX(), a.getY(), a.setImgName());
             }
 

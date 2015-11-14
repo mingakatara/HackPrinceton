@@ -8,6 +8,7 @@ public class CSGame {
 
         game.setEngine(engine);
         engine.setCSEngine(mail);
+        engine.setGameScreen(game);
         mail.setEngine(engine);
 
         while (true) {
