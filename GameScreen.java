@@ -1,9 +1,11 @@
 // Dependancies: StdDraw.java
 
+import java.util.Stack;
+
 public class GameScreen {
 
     private CSEngine engine;
-    private RedBlackBST<Integer, Actor> iterable;
+    private Stack<Actor> iterable;
     private double mouseX;
     private double mouseY;
 
@@ -13,7 +15,7 @@ public class GameScreen {
         this.engine = e;
     }
 
-    public void setActors(RedBlackBST x) {
+    public void setActors(Stack<Actor> x) {
         this.iterable = x;
     }
 
