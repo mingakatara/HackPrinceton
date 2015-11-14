@@ -39,6 +39,7 @@ public class GameScreen {
 
         Double xshift = 500.0 - player.getX();
         Double yshift = 200.0 - player.getY();
+        System.out.println(player.getX() + "  " + player.getY());
 
         for (Actor a : iterable) {
             if (a instanceof Player) {
