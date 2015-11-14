@@ -1,1 +1,9 @@
-hey
+#Comment
+#name
+#x
+#y
+#imgname
+player
+0
+0
+images\\fill.png

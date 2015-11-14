@@ -30,6 +30,7 @@ public class Actor {
     public Actor(double x, double y, String imgName) {
         this.x = x;
         this.y = y;
+        this.maxV = 5;
         this.imgName = imgName;
     }
 
