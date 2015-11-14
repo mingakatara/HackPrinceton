@@ -49,6 +49,7 @@ public class Actor {
         public void setVY(double vy) {
             this.vy = vy;
         }
+<<<<<<< HEAD
 
         // set x accel of this Actor
         public void setAX(double ax) {
@@ -99,6 +100,48 @@ public class Actor {
     // returns the filepath for this Actor's Image
     public void getImgName() {
         return this.imgName;
+=======
+
+        // set x accel of this Actor
+        public void setAX(double ax) {
+            this.ax = ax;
+        }
+
+        // set y accel of this Actor
+        public void setAY(double ay) {
+            this.ay = ay;
+        }
+
+        //***************** getters
+
+        // returns the x location of this Actor
+        public double getX() {
+            return x;
+        }
+
+        // returns the y location of this Actor
+        public double getY() {
+            return y;
+        }   
+
+        public double getVX() {
+            return vx;
+        }
+
+        // returns the y location of this Actor
+        public double getVY() {
+            return vy
+        }
+
+        public double getAX() {
+            return ax;
+        }
+
+        // returns the y location of this Actor
+        public double getAY() {
+            return ay;
+        }
+>>>>>>> origin/master
     }
 
     public void update() {
