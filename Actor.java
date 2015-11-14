@@ -104,7 +104,6 @@ public class Actor {
         return maxV;
     }
 
-
     // set the filepath for this Actor's image
     public void setImgName(String imgName) {
         this.imgName = imgName;
@@ -121,7 +120,7 @@ public class Actor {
         if (vx > maxV) 
             vx = maxV;
 
-        if (vx < -maxV)
+        if (vx < (maxV * -1))
             vx = -maxV;
 
         y += vy;
@@ -129,7 +128,7 @@ public class Actor {
         if (vy > maxV) 
             vy = maxV;
 
-        if (vy < -maxV)
+        if (vy < (maxV * -1))
             vy = -maxV;
     }
 }
