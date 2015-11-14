@@ -1,4 +1,6 @@
-import java.util.Stack;
+
+import java.util.TreeMap;
+
 public class CSEngine {
     private static final int UP     = 0;
     private static final int LEFT   = 1;
@@ -10,8 +12,9 @@ public class CSEngine {
 
     private static final int impulse = 5;
 
-    private Stack<Actor> actors;
+    private RedBlackBST<Integer, Actor> actors;
     private CSMailroom mailroom;
+    private GameScreen screen;
 
     public void update(Actor a, int id) {
         switch(id) {
@@ -39,27 +42,41 @@ public class CSEngine {
 
     //**************** Move actor calls
 
+    // give Actor a an up impulse
     private void moveUp(Actor a) {
         double currVY = a.getVY();
         currVY += impulse;
         a.setVY(currVY);
     }
 
+    // give Actor a a down impulse
     private void moveDown(Actor a) {
         double currVY = a.getVY();
         currVY -= impulse;
         a.setVY(currVY);
     }
 
+    // give Actor a a left impulse
     private void moveLeft(Actor a) {
         double currVX = a.getVX();
         currVX -= impulse;
         a.setVX(currVX);
     }
 
+    // give Actor a a right impulse
     private void moveRight(Actor a) {
         double currVX = a.getVX();
         currVX += impulse;
         a.setVX(currVX);
+    }
+
+    //**************** Actor give/kill calls
+    public void giveActor(Actor a) {
+        actors.put(a);
+        screen.setActors(actors);
+    }
+
+    public void killActor(Actor a) {
+
     }
 }
