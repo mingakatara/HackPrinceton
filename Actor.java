@@ -4,6 +4,7 @@
 */
 public class Actor {
 
+    private static final double CUTOFF = 1;
     /*****************************   Variables   ***********************************/
     private double x;   // x coord of this actor on the screen
     private double vx;  // current x velocity of this Actor 
@@ -117,18 +118,22 @@ public class Actor {
     public void update() {
         x += vx;
         vx += ax;
+
         if (vx > maxV) 
             vx = maxV;
-
         if (vx < (maxV * -1))
             vx = -maxV;
+        if (Math.abs(vx) < CUTOFF)
+            vx = 0;
 
         y += vy;
         vy += ay;
+
         if (vy > maxV) 
             vy = maxV;
-
         if (vy < (maxV * -1))
             vy = -maxV;
+        if (Math.abs(vy) < CUTOFF)
+            vy = 0;
     }
 }
