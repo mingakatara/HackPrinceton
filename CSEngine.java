@@ -1,5 +1,6 @@
 
 import java.util.TreeMap;
+import java.util.Stack;
 
 public class CSEngine {
     private static final int UP     = 0;
@@ -12,9 +13,12 @@ public class CSEngine {
 
     private static final int impulse = 5;
 
-    private RedBlackBST<Integer, Actor> actors;
+    private RedBlackBST<Integer, Actor> actorTree;
+    private Stack<Actor> actors;
     private CSMailroom mailroom;
     private GameScreen screen;
+
+    private int currID = 0;
 
     public void update(Actor a, int id) {
         switch(id) {
@@ -71,12 +75,19 @@ public class CSEngine {
     }
 
     //**************** Actor give/kill calls
-    public void giveActor(Actor a) {
-        actors.put(a);
+    public void giveActor(Actor a, int id) {
+        actorTree.put(new Integer(id), a);
+        actors.push(a);
         screen.setActors(actors);
     }
 
     public void killActor(Actor a) {
-
+        actorTree.delete(a);
+        Iterable<Integer> keys = actorTree.keys();
+        actors = new Stack<Actor>();
+        for (int i : keys) {
+            actors.push(actorTree.get(i));
+        }
+        screen.setActors(actors);
     }
 }
