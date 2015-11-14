@@ -87,9 +87,9 @@ public class CSEngine {
         if (a == null) throw new java.lang.IllegalArgumentException("Null Actor to receiveMail");
         switch(id) {
             case UP:    moveUp(a);      break;
-            case LEFT:  moveDown(a);    break;
-            case DOWN:  moveRight(a);   break;
-            case RIGHT: moveLeft(a);    break;
+            case LEFT:  moveLeft(a);    break;
+            case DOWN:  moveDown(a);   break;
+            case RIGHT: moveRight(a);    break;
             default:    break; 
         }
     }
