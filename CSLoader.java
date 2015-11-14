@@ -10,21 +10,20 @@ public class CSLoader {
 
     CSEngine engine;
 
-    public CSLoader() throws IOException {
-        //this.engine = engine;
+    public CSLoader(CSEngine engine) throws IOException {
+        this.engine = engine;
         this.buildFolder = new File(build);
         this.playerFile = new File(player);
         Scanner readMe = new Scanner(playerFile);
         while (readMe.hasNext()) {
             String nextline = readMe.next();
-            if (nextline.char)
             System.out.println(readMe.next());
         }
     }
 
     // test main
     public static void main(String[] args) throws IOException {
-
-        CSLoader loader = new CSLoader();
+        CSEngine engine = new CSEngine();
+        CSLoader loader = new CSLoader(engine);
     }
 }
