@@ -1,4 +1,7 @@
+
+import java.util.TreeMap;
 import java.util.Stack;
+
 public class CSEngine {
     private static final int UP     = 0;
     private static final int LEFT   = 1;
@@ -10,8 +13,12 @@ public class CSEngine {
 
     private static final int impulse = 5;
 
+    private RedBlackBST<Integer, Actor> actorTree;
     private Stack<Actor> actors;
     private CSMailroom mailroom;
+    private GameScreen screen;
+
+    private int currID = 0;
 
     public void update(Actor a, int id) {
         switch(id) {
@@ -39,27 +46,48 @@ public class CSEngine {
 
     //**************** Move actor calls
 
+    // give Actor a an up impulse
     private void moveUp(Actor a) {
         double currVY = a.getVY();
         currVY += impulse;
         a.setVY(currVY);
     }
 
+    // give Actor a a down impulse
     private void moveDown(Actor a) {
         double currVY = a.getVY();
         currVY -= impulse;
         a.setVY(currVY);
     }
 
+    // give Actor a a left impulse
     private void moveLeft(Actor a) {
         double currVX = a.getVX();
         currVX -= impulse;
         a.setVX(currVX);
     }
 
+    // give Actor a a right impulse
     private void moveRight(Actor a) {
         double currVX = a.getVX();
         currVX += impulse;
         a.setVX(currVX);
+    }
+
+    //**************** Actor give/kill calls
+    public void giveActor(Actor a, int id) {
+        actorTree.put(new Integer(id), a);
+        actors.push(a);
+        screen.setActors(actors);
+    }
+
+    public void killActor(Actor a) {
+        actorTree.delete(a);
+        Iterable<Integer> keys = actorTree.keys();
+        actors = new Stack<Actor>();
+        for (int i : keys) {
+            actors.push(actorTree.get(i));
+        }
+        screen.setActors(actors);
     }
 }
