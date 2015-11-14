@@ -1,5 +1,5 @@
 public class Terrain extends Actor {
-	double radius, width, height; 
+	private double radius, width, height; 
 
 	public Terrain (double x, double y, String imgName) {
 		super(x, y, imgName);
