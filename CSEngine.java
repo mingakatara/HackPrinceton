@@ -81,8 +81,8 @@ public class CSEngine {
         screen.setActors(actors);
     }
 
-    public void killActor(Actor a) {
-        actorTree.delete(a);
+    public void killActor(int id) {
+        actorTree.delete(id);
         Iterable<Integer> keys = actorTree.keys();
         actors = new Stack<Actor>();
         for (int i : keys) {
