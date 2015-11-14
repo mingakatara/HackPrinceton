@@ -2,8 +2,10 @@
 
 public class GameScreen {
 
-    private Engine engine;
+    private CSEngine engine;
     private RedBlackBST<Integer, Actor> iterable;
+    private double mouseX;
+    private double mouseY;
 
     public GameScreen() {}
 
@@ -28,15 +30,20 @@ public class GameScreen {
                 StdDraw.picture(a.getX(), a.getY(), a.setImgName());
             }
 
-        char next = StdDraw.nextKeyTyped();
-
-        switch (next) {
-            case 'w': engine.update(player, 0);
-            case 'a': engine.update(player, 1);
-            case 's': engine.update(player, 2);
-            case 'd': engine.update(player, 3);
-        }
-        StdDraw.show(10);
+            if (StdDraw.hasNextKeyTyped()) {
+                char next = StdDraw.nextKeyTyped();
+                switch (next) {
+                case 'w': engine.update(player, 0);
+                case 'a': engine.update(player, 1);
+                case 's': engine.update(player, 2);
+                case 'd': engine.update(player, 3);
+                }
+            }
+            if (StdDraw.mousePressed()) {
+                mouseX = StdDraw.mouseX();
+                mouseY = StdDraw.mouseY();
+            }
+            StdDraw.show(10);
         }
     }
 }
