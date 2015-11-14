@@ -85,12 +85,27 @@ public class CSEngine {
     // given mail information, acts accordingly (called from mailroom)
     public void receiveMail(Actor a, int id) {
         if (a == null) throw new java.lang.IllegalArgumentException("Null Actor to receiveMail");
+        System.out.println(id);
         switch(id) {
-            case UP:    moveUp(a);      break;
-            case LEFT:  moveLeft(a);    break;
-            case DOWN:  moveDown(a);   break;
-            case RIGHT: moveRight(a);    break;
-            default:    break; 
+            case UP: {  
+                moveUp(a); 
+                System.out.println("up");    
+            } break;
+            case LEFT:  {
+                moveLeft(a);   
+                System.out.println("left");
+            } break;
+
+            case DOWN: {
+                moveDown(a); 
+                System.out.println("down");
+            } break;
+
+            case RIGHT: {
+                moveRight(a);  
+                System.out.println("right");  
+            } break;
+            default: break; 
         }
     }
 
