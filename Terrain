@@ -1,0 +1,22 @@
+public class Terrain extends Actor {
+	double radius, width, height; 
+
+	public Terrain (double x, double y, String imgName) {
+		super(x, y, imgName);
+
+		//can change radius to be dependent on input or just hard code values
+		radius = 5.0;
+
+		width = this.x + 10;
+		height = this.y + 10;
+	}
+
+	// checks to see if a point is in the bounds of this Terrain 
+	public boolean contains(int pointX, pointY) {
+		if (pointX >= this.x && pointX <= width) {
+			if (pointY >= this.y && pointX <= height)
+				return true;
+		}
+		else return false;
+	}
+}
