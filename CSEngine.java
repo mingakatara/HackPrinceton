@@ -17,7 +17,7 @@ public class CSEngine {
     private Stack<Actor> actors;
     private CSMailroom mailroom;
     private GameScreen screen;
-
+    
     private int currID;
 
     // Constructor, init and setters
