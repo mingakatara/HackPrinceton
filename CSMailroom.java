@@ -41,7 +41,7 @@ public class CSMailroom {
 
     public void receive() {
         String line = in.next();
-        System.out.println("Text Recieved: " + line + 2);
+        System.out.println("Text Recieved: " + line + " " + 2);
 
     }
 
