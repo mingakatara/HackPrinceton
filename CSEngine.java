@@ -17,10 +17,62 @@ public class CSEngine {
     private Stack<Actor> actors;
     private CSMailroom mailroom;
     private GameScreen screen;
+    
+    private int currID;
 
-    private int currID = 0;
+    // Constructor, init and setters
 
-    public void update(Actor a, int id) {
+    public CSEngine() {
+        this.actors     = new Stack<Actor>();
+        this.actorTree  = new RedBlackBST<Integer, Actor>();
+        this.currID     = 0;
+    }
+
+    public void setGameScreen(GameScreen screen) {
+        this.screen = screen;
+    }
+
+    public void setCSMailroom(CSMailroom mailroom) {
+        this.mailroom = mailroom;
+    }
+
+    // called after mailroom and gamescreen are set, returns true
+    // if all checks out, false if not
+    public boolean init() {
+        if (screen == null)     return false;
+        if (mailroom == null)   return false;
+        if (actors == null)     return false;
+        if (actorTree == null)  return false;
+        // ping server
+        return true;
+    }
+
+    //********************  Event and mail control
+
+    // handle general event given an actor and an id
+    public void event(Actor a, int id) {
+        if (a == null) throw new java.lang.IllegalArgumentException("Null Actor to Event (move)");
+        // switch(id) {
+        //     case UP:    break;
+        //     case LEFT:  break;
+        //     case DOWN:  break;
+        //     case RIGHT: break;
+        //     default:    break;
+        // }
+        receiveMail(a, id);
+    }
+
+    // handle mouse click event given an actor
+    public void event(Actor a, int id, double x, double y) {
+        if (a == null) throw new java.lang.IllegalArgumentException("Null Actor to Event (mouse)");
+        switch(id) {
+            default: break;
+        }
+    }
+
+    // given information, sends mail to mailroom
+    public void sendMail(Actor a, int id) {
+        if (a == null) throw new java.lang.NullPointerException();
         switch(id) {
             case UP:    break;
             case LEFT:  break;
@@ -30,24 +82,37 @@ public class CSEngine {
         }
     }
 
+    // given mail information, acts accordingly (called from mailroom)
+    public void receiveMail(Actor a, int id) {
+        if (a == null) throw new java.lang.IllegalArgumentException("Null Actor to receiveMail");
+        switch(id) {
+            case UP:    moveUp(a);      break;
+            case LEFT:  moveDown(a);    break;
+            case DOWN:  moveRight(a);   break;
+            case RIGHT: moveLeft(a);    break;
+            default:    break; 
+        }
+    }
+
+    // returns all active actors this engine controls
     public Iterable<Actor> getActors() {
         return actors;
     }   
 
-    public void setCSMailroom(CSMailroom mailroom) {
-        this.mailroom = mailroom;
-    }
+    //******************************** simple update call
 
+    // simple update call to all actors
     public void run() {
         for (Actor a : actors) {
             a.update();
         }
     }
 
-    //**************** Move actor calls
+    //********************************* Move actor calls
 
     // give Actor a an up impulse
     private void moveUp(Actor a) {
+        if (a == null) throw new java.lang.IllegalArgumentException("Null Actor to moveUp");
         double currVY = a.getVY();
         currVY += impulse;
         a.setVY(currVY);
@@ -55,6 +120,7 @@ public class CSEngine {
 
     // give Actor a a down impulse
     private void moveDown(Actor a) {
+        if (a == null) throw new java.lang.IllegalArgumentException("Null Actor to moveDown");
         double currVY = a.getVY();
         currVY -= impulse;
         a.setVY(currVY);
@@ -62,6 +128,7 @@ public class CSEngine {
 
     // give Actor a a left impulse
     private void moveLeft(Actor a) {
+        if (a == null) throw new java.lang.IllegalArgumentException("Null Actor to moveLeft");
         double currVX = a.getVX();
         currVX -= impulse;
         a.setVX(currVX);
@@ -69,13 +136,16 @@ public class CSEngine {
 
     // give Actor a a right impulse
     private void moveRight(Actor a) {
+        if (a == null) throw new java.lang.IllegalArgumentException("Null Actor to moveRight");
         double currVX = a.getVX();
         currVX += impulse;
         a.setVX(currVX);
     }
 
-    //**************** Actor give/kill calls
+    //************************** Actor give/kill calls
+
     public void giveActor(Actor a, int id) {
+        if (a == null) throw new java.lang.IllegalArgumentException("Null Actor to giveActor");
         actorTree.put(new Integer(id), a);
         actors.push(a);
         screen.setActors(actors);
