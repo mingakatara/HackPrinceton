@@ -19,33 +19,44 @@ public class GameScreen {
         this.iterable = x;
     }
 
-    public void run() {
-
+    public void init() {
         Player player = new Player();
 
         StdDraw.setCanvasSize(1000,500);
         StdDraw.setXscale(0, 1000);
         StdDraw.setYscale(0, 500);
 
-        while (true) {
-            for (Actor a : iterable) {
-                StdDraw.picture(a.getX(), a.getY(), a.getImgName());
-            }
+        StdDraw.rectangle(500.0, 250.0, 250.0, 125.0);
+    }
 
-            if (StdDraw.hasNextKeyTyped()) {
-                char next = StdDraw.nextKeyTyped();
-                switch (next) {
-                case 'w': engine.update(player, 0);
-                case 'a': engine.update(player, 1);
-                case 's': engine.update(player, 2);
-                case 'd': engine.update(player, 3);
+    public void run() {
+
+        Double xshift = 500.0 - player.getX();
+        Double yshift = 200.0 - player.getY();
+
+        for (Actor a : iterable) {
+            if (s instanceof Player) {
+                StdDraw.picture(500, 200, a.getImgName());
+            }
+            else {
+                StdDraw.picture((a.getX() + xshift), (a.getY() + yshift), a.getImgName());
+            }
+        }
+        
+        if (StdDraw.hasNextKeyTyped()) {
+            char next = StdDraw.nextKeyTyped();
+            switch (next) {
+                case 'w': engine.event(player, 0);
+                case 'a': engine.event(player, 1);
+                case 's': engine.event(player, 2);
+                case 'd': engine.event(player, 3);
                 }
             }
-            if (StdDraw.mousePressed()) {
-                mouseX = StdDraw.mouseX();
-                mouseY = StdDraw.mouseY();
-            }
-            StdDraw.show(10);
+        if (StdDraw.mousePressed()) {
+            mouseX = StdDraw.mouseX();
+            mouseY = StdDraw.mouseY();
+            engine.event(player, 4, mouseX, mouseY);
         }
+        StdDraw.show(10);
     }
 }
