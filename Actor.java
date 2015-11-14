@@ -103,6 +103,16 @@ public class Actor {
         return this.imgName;
     }
 
+    // set the filepath for this Actor's image
+    public void setImgName(String imgName) {
+        this.imgName = imgName;
+    }
+
+    // returns the filepath for this Actor's Image
+    public void getImgName() {
+        return this.imgName;
+    }
+
     public void update() {
         x += vx;
         vx += ax;
