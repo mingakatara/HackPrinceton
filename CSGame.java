@@ -11,6 +11,9 @@ public class CSGame {
         engine.setGameScreen(game);
         mail.setEngine(engine);
 
+        game.init();
+        engine.init()
+
         while (true) {
             engine.run();
             game.run();
