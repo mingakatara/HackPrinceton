@@ -13,6 +13,8 @@ public class Actor {
     private double vy; // current y velocity of this Actor
     private double ay; // current y acceleration of this Actor
 
+    private double maxV; // maximum velocity of this actor
+
     private String imgName; // image associated with this actor
 
     /*****************************   Constructors *********************************/
@@ -62,6 +64,10 @@ public class Actor {
         this.ay = ay;
     }
 
+    public void setMaxV(double maxV) {
+        this.maxV = maxV;
+    }
+
     //***************** getters
 
     // returns the x location of this Actor
@@ -92,6 +98,11 @@ public class Actor {
         return ay;
     }
 
+    // returns maximum velocity 
+    public double getMaxV() {
+        return maxV;
+    }
+
 
     // set the filepath for this Actor's image
     public void setImgName(String imgName) {
@@ -116,8 +127,18 @@ public class Actor {
     public void update() {
         x += vx;
         vx += ax;
+        if (vx > maxV) 
+            vx = maxV;
+
+        if (vx < -maxV)
+            vx = -maxV;
 
         y += vy;
         vy += ay;
+        if (vy > maxV) 
+            vy = maxV;
+
+        if (vy < -maxV)
+            vy = -maxV;
     }
 }
