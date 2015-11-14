@@ -16,7 +16,7 @@ public class CSEngine {
     private RedBlackBST<Integer, Actor> actorTree;
     private Stack<Actor> actors;
     private CSMailroom mailroom;
-    //private GameScreen screen;
+    private GameScreen screen;
     
     private int currID;
 
@@ -28,9 +28,9 @@ public class CSEngine {
         this.currID     = 0;
     }
 
-    // public void setGameScreen(GameScreen screen) {
-    //     this.screen = screen;
-    // }
+    public void setGameScreen(GameScreen screen) {
+        this.screen = screen;
+    }
 
     public void setCSMailroom(CSMailroom mailroom) {
         this.mailroom = mailroom;
@@ -39,7 +39,7 @@ public class CSEngine {
     // called after mailroom and gamescreen are set, returns true
     // if all checks out, false if not
     public boolean init() {
-        //if (screen == null)     return false;
+        if (screen == null)     return false;
         if (mailroom == null)   return false;
         if (actors == null)     return false;
         if (actorTree == null)  return false;
@@ -148,7 +148,7 @@ public class CSEngine {
         if (a == null) throw new java.lang.IllegalArgumentException("Null Actor to giveActor");
         actorTree.put(new Integer(id), a);
         actors.push(a);
-        //screen.setActors(actors);
+        screen.setActors(actors);
     }
 
     public void killActor(int id) {
@@ -158,6 +158,6 @@ public class CSEngine {
         for (int i : keys) {
             actors.push(actorTree.get(i));
         }
-        //screen.setActors(actors);
+        screen.setActors(actors);
     }
 }
